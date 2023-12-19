@@ -1,0 +1,18 @@
+coverage:
+  target:
+    sourceRoot: test
+    sources:
+      - "coverage/test.info"
+    exclude:
+      - "lib/test/*"
+  targets:
+    - gens:
+      sources:
+        - "test/coverage/test.info"
+      exclude:
+        - "lib/**/*.*.dart"
+    - error:
+      sources:
+        - "test/cov/lcov.info"
+      exclude:
+        - "lib/**/*.*.dart"

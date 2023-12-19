@@ -1,0 +1,5 @@
+coverage:
+  targets:
+    - sourceRoot: packages/test
+      exclude:
+        - "lib/**/*.*.dart"

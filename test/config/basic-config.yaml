@@ -1,0 +1,18 @@
+coverage:
+  target:
+    sourceRoot: packages/root
+    sources:
+      - "cov/lcov.info"
+    exclude:
+      - "lib/db/*"
+      - "lib/test/*"
+      - "lib/**/*.*.dart"
+  targets:
+    - test1:
+        sourceRoot: packages/test1
+        exclude:
+          - "lib/**/*.*.dart"
+    - test2:
+        sources:
+          - "packages/test2/coverage/lcov.info"
+          - "packages/test2/cov/lcov.info"

@@ -1,0 +1,10 @@
+coverage:
+  targets:
+    - test1:
+      sourceRoot: packages/test1
+      exclude:
+        - "lib/**/*.*.dart"
+    - test2:
+      sources:
+        - "packages/test2/coverage/lcov.info"
+        - "packages/test2/cov/lcov.info"
