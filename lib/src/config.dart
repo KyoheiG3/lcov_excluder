@@ -30,19 +30,22 @@ class Config {
       throw ArgumentError.value(config, 'config', 'does not contain $_rootKey');
     }
 
+    final $default = root[_defaultKey] as Map? ?? {};
     final target = root[_targetKey] as Map? ?? root;
     final targets = root[_targetsKey] as List? ?? [];
-    return Config._target('target', target, info, targets);
+    return Config._target('target', $default, target, info, targets);
   }
 
   factory Config._target(
     String name,
+    Map<dynamic, dynamic> $default,
     Map<dynamic, dynamic> target,
     String? info, [
     List<dynamic> targets = const [],
   ]) {
     const path = 'coverage/lcov.info';
 
+    final defaultExclude = $default[_excludeKey] as List? ?? [];
     final exclude = target[_excludeKey] as List? ?? [];
     final sources =
         (info != null ? [info] : target[_sourcesKey] as List?) ?? [path];
@@ -50,7 +53,7 @@ class Config {
 
     return Config._(
       name,
-      exclude.map((e) => Glob(e as String)).toList(),
+      [...defaultExclude, ...exclude].map((e) => Glob(e as String)).toList(),
       sourceRoot,
       sources.map((source) => source as String).toList(),
       targets.map((target) {
@@ -66,6 +69,7 @@ class Config {
 
         return Config._target(
           keys.first as String,
+          $default,
           (map[keys.first] ?? map) as Map,
           info,
         );
@@ -74,6 +78,7 @@ class Config {
   }
 
   static const _rootKey = 'coverage';
+  static const _defaultKey = 'default';
   static const _targetKey = 'target';
   static const _excludeKey = 'exclude';
   static const _sourceRootKey = 'sourceRoot';

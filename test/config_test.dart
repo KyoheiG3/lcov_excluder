@@ -44,6 +44,45 @@ void main() {
       });
     });
 
+    group('when the valid YAML file is given which has default exclude.', () {
+      test('should create a Config instance.', () {
+        final config =
+            Config.filePath(config: 'test/config/default-config.yaml');
+
+        // test target
+        expect(config.name, 'target');
+        expect(config.patterns.length, 1);
+        expect(config.patterns[0].pattern, 'lib/**/*.*.dart');
+        expect(config.sourceRoot, '');
+        expect(config.sources.length, 1);
+        expect(config.sources[0], 'coverage/lcov.info');
+        expect(config.resolved[0], 'coverage/lcov.info');
+        expect(config.targets.length, 2);
+
+        // test target1
+        final test1 = config.targets[0];
+        expect(test1.name, 'test1');
+        expect(test1.patterns.length, 1);
+        expect(test1.patterns[0].pattern, 'lib/**/*.*.dart');
+        expect(test1.sourceRoot, 'packages/test1');
+        expect(test1.sources.length, 1);
+        expect(test1.sources[0], 'coverage/lcov.info');
+        expect(test1.resolved[0], 'packages/test1/coverage/lcov.info');
+        expect(test1.targets.length, 0);
+
+        // test target1
+        final test2 = config.targets[1];
+        expect(test2.name, 'test2');
+        expect(test2.patterns.length, 1);
+        expect(test2.patterns[0].pattern, 'lib/**/*.*.dart');
+        expect(test2.sourceRoot, '');
+        expect(test2.sources.length, 1);
+        expect(test2.sources[0], 'coverage/lcov.info');
+        expect(test2.resolved[0], 'coverage/lcov.info');
+        expect(test2.targets.length, 0);
+      });
+    });
+
     group('when the short valid YAML file is given.', () {
       test('should create a Config instance.', () {
         final config = Config.filePath(config: 'test/config/short-config.yaml');
