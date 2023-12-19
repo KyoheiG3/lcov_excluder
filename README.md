@@ -26,22 +26,24 @@ $ dart run lcov_excluder exclude --config-file your-config.yaml
 
 ### Basic configuration file example
 
-Define `coverage` at the root. `coverage` can have `target` and `targets` defined.
+Define `coverage` at the root. `coverage` can have `default`, `target` and `targets` defined.
 
 ```yaml
 coverage:
+  default:
+    exclude:
+      - "lib/**/*.*.dart"
   target:
     sources:
       - "cov/lcov.info"
     exclude:
       - "lib/db/*"
       - "lib/test/*"
-      - "lib/**/*.*.dart"
   targets:
     - service:
       sourceRoot: packages/service
       exclude:
-        - "lib/**/*.*.dart"
+        - "lib/service/*"
     - db:
       sources:
         - "packages/db/coverage/lcov.info"
@@ -95,6 +97,27 @@ coverage:
 ```
 
 When configured as shown above, all Dart files with double extensions under the `lib` directory will be excluded.
+
+The `exclude` defined in `default` is merged into all `target` configurations and takes precedence over the `exclude` in `target`. In the following configuration, `lib/**/*.*.dart` is excluded not only from the `target`, but also from the `lcov.info` files of `test1` and `test2`.
+
+```yaml
+coverage:
+  default:
+    exclude:
+      - "lib/**/*.*.dart"
+  target:
+    exclude:
+      - "lib/sample/*"
+  targets:
+    - test1:
+      sources:
+        - "packages/test1/coverage/lcov.info"
+      exclude:
+        - "lib/service/*"
+    - test2:
+      sources:
+        - "packages/test2/coverage/lcov.info"
+```
 
 ### Target
 
