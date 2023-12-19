@@ -1,0 +1,34 @@
+name: Test
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Dart SDK
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: 3.2.3
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Dart Analyzer
+        uses: invertase/github-action-dart-analyzer@v1
+        with:
+          fatal-infos: true
+          fatal-warnings: true
+          annotate: true
+          annotate-only: false
+
+      - name: Run tests
+        run: dart test
