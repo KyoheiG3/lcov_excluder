@@ -21,7 +21,7 @@ $ dart pub global activate lcov_excluder
 Create `lcov-config.yaml` on your project root directory. Or, you can create a `.yaml` file with any name and specify the file during the execution of `lcov_excluder`. If no specification is provided, `lcov-config.yaml` will be automatically loaded.
 
 ```bash
-$ dart pub run lcov_excluder exclude --config-file your-config.yaml
+$ dart run lcov_excluder exclude --config-file your-config.yaml
 ```
 
 ### Basic configuration file example
@@ -78,7 +78,7 @@ coverage:
 It is also possible to omit `sources`. In that case, the `lcov.info` specified during the execution of `lcov_excluder` will be loaded.
 
 ```bash
-$ dart pub run lcov_excluder exclude --info-file your-lcov.info
+$ dart run lcov_excluder exclude --info-file your-lcov.info
 ```
 
 If `sources` is omitted and no `info-file` is specified, `coverage/lcov.info` will be automatically loaded.

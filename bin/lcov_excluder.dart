@@ -19,13 +19,13 @@ class LcovExcludeCommand extends Command<dynamic> {
         'info-file',
         abbr: 'i',
         help:
-            'The target .info file path to manipulate. Defaults to `coverage/lcov.info.`',
+            'The target .info file path to manipulate. Defaults to `coverage/lcov.info`.',
         valueHelp: 'FILE',
       )
       ..addOption(
         'config-file',
         abbr: 'c',
-        help: 'Configuration .yaml file path. Defaults to `lcov-config.yaml.`',
+        help: 'Configuration .yaml file path. Defaults to `lcov-config.yaml`.',
         valueHelp: 'FILE',
       )
       ..addFlag(
