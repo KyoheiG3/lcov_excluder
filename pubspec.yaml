@@ -1,6 +1,6 @@
 name: lcov_excluder
 description: It is possible to exclude coverage by editing the contents of the lcov.info file.
-version: 0.1.0
+version: 0.2.0
 repository: https://github.com/KyoheiG3/lcov_excluder
 documentation: https://github.com/KyoheiG3/lcov_excluder
 issue_tracker: https://github.com/KyoheiG3/lcov_excluder/issues
